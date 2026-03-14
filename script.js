@@ -125,10 +125,23 @@ function backToLock() {
 // Atur password yang kamu inginkan di sini
 const PASSWORD_BENAR = "192009"; 
 
+// Tambahkan event listener agar bisa menekan "Enter" di keyboard (terutama HP)
+document.addEventListener('DOMContentLoaded', () => {
+    const inputField = document.getElementById('passwordField');
+    if (inputField) {
+        inputField.addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                goToDesktop();
+            }
+        });
+    }
+});
+
 function goToDesktop() {
     const inputField = document.getElementById('passwordField');
     const loginScreen = document.getElementById('loginScreen');
-    const inputPass = inputField.value;
+    // Hapus spasi berlebih yang mungkin terketik otomatis di HP
+    const inputPass = inputField.value.trim();
 
     if (inputPass === PASSWORD_BENAR) {
         // Efek visual sebelum pindah halaman
