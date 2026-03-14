@@ -123,7 +123,7 @@ function backToLock() {
 
 // Fungsi masuk ke Desktop
 // Atur password yang kamu inginkan di sini
-const PASSWORD_BENAR = "2911919"; 
+const PASSWORD_BENAR = "192009"; 
 
 function goToDesktop() {
     const inputField = document.getElementById('passwordField');

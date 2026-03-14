@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful Galaxy</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;1,300&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: #030008;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        /* Latar Belakang Galaxy */
+        .galaxy-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Menggunakan gambar mirip yang diminta (Messier 83 / Southern Pinwheel Galaxy) */
+            background: url('https://imagine.gsfc.nasa.gov/hst_bday/images/march-19-2019-galaxy-m83.jpg') no-repeat center center;
+            background-size: cover;
+            animation: zoomPan 30s infinite alternate ease-in-out;
+            z-index: 1;
+            opacity: 0.8;
+            filter: contrast(1.1) brightness(0.9);
+        }
+
+        @keyframes zoomPan {
+            0% { transform: scale(1) translate(0, 0); }
+            100% { transform: scale(1.15) translate(-2%, 2%); }
+        }
+
+        /* Overlay Gradasi Gelap */
+        .overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at center, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.8) 100%);
+            z-index: 2;
+        }
+
+        /* Kerlip Bintang Tambahan */
+        .stars {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 3;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            background-color: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite alternate;
+            opacity: 0;
+            box-shadow: 0 0 10px 2px rgba(255, 255, 255, 0.4);
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.1; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.5); }
+        }
+
+        /* Konten Utama */
+        .content {
+            position: relative;
+            z-index: 10;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            text-align: center;
+            padding: 0 30px;
+            color: #ffffff;
+        }
+
+        .text-1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            font-style: italic;
+            letter-spacing: 2px;
+            margin-bottom: 25px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 2.5s forwards 1s ease-out;
+            text-shadow: 0 0 20px rgba(255, 200, 255, 0.6), 0 0 40px rgba(100, 100, 255, 0.4);
+            color: #fff4fa;
+        }
+
+        .text-2 {
+            font-size: 1.2rem;
+            font-weight: 300;
+            line-height: 1.8;
+            max-width: 600px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 2.5s forwards 4.5s ease-out;
+            text-shadow: 0 0 15px rgba(0, 0, 0, 0.8);
+            color: #e6e6e6;
+            letter-spacing: 0.5px;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tombol Kembali */
+        .back-btn {
+            position: absolute;
+            bottom: 50px;
+            padding: 12px 35px;
+            border-radius: 50px;
+            border: 1px solid rgba(255,255,255,0.4);
+            background: rgba(255,255,255,0.05);
+            color: #fff;
+            font-size: 13px;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            backdrop-filter: blur(8px);
+            opacity: 0;
+            animation: fadeIn 2s forwards 8s;
+            transition: all 0.4s ease;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0,0,0,0.3);
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.2);
+            border-color: #fff;
+            box-shadow: 0 0 25px rgba(255,255,255,0.6);
+            transform: translateY(-3px);
+        }
+
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .text-1 { font-size: 2.2rem; }
+            .text-2 { font-size: 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="galaxy-bg"></div>
+    <div class="overlay"></div>
+    
+    <!-- Kontainer Bintang Animasi -->
+    <div class="stars" id="stars-container"></div>
+
+    <div class="content">
+        <h1 class="text-1 mb-5">Galaxy M83</h1>
+        <p class="text-2 mb-5">19 maret 2008</p> <br><br><br>       
+        <h1 class="text-1">Indah ya.....kaya kamu</h1>
+        <p class="text-2">semesta aja kagum sampe nunjukin indah nya di waktu kelahiran kamu ✨</p>
+        <p class="text-2">apalagi aku, yang selalu kagum pas liat cantik nya kamuu</p>
+        <p class="text-2">selanat ulang tahun sayaanggggg</p>
+
+        <a href="desktop.html" class="back-btn">Kembali</a>
+    </div>
+
+    <script>
+        // Membuat bintang kelap-kelip secara acak pakai Javascript
+        const container = document.getElementById('stars-container');
+        const starCount = 60; // Jumlah bintang
+
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.classList.add('star');
+            
+            // Ukuran acak
+            const size = Math.random() * 3 + 1;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            
+            // Posisi acak
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            
+            // Durasi animasi acak (1s sampai 4s)
+            const duration = Math.random() * 3 + 1;
+            star.style.setProperty('--duration', duration + 's');
+            
+            // Delay animasi acak
+            star.style.animationDelay = Math.random() * 5 + 's';
+            
+            container.appendChild(star);
+        }
+    </script>
+</body>
+</html>

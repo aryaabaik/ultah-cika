@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Windows Mobile Desktop</title>
+    <audio id="bgm" loop>
+      <source src="music/Love-wave to earth (instrumental).mp3" type="audio/mpeg">
+    </audio>
     <style>
         * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
@@ -119,7 +122,7 @@
                 <span>Paint</span>
             </div>
 
-            <div class="app-item" onclick="window.location.href='https://ipatsajaa.github.io/cobacoba/layout.html'">
+            <div class="app-item" onclick="window.location.href='https://aryaabaik.github.io/ptobooth-ayayoy/layout.html'">
                 <img src="https://win98icons.alexmeub.com/icons/png/camera3-2.png" class="app-icon">
                 <span>Photobooth</span>
             </div>
@@ -127,7 +130,7 @@
                 <img src="https://win98icons.alexmeub.com/icons/png/camera-2.png" class="app-icon">
                 <span>Camera</span>
             </div>
-            <div class="app-item" onclick="window.location.href='flower.html'">
+            <div class="app-item" onclick="window.location.href='flow.index.html'">
                 <img src="https://win98icons.alexmeub.com/icons/png/msn3-5.png" class="app-icon">
                 <span>Flower</span>
             </div>
@@ -136,12 +139,20 @@
                 <span>Tetris</span>
             </div>
 
-            <div class="app-item" onclick="window.location.href='Undangan.html'">
-                <img src="https://win98icons.alexmeub.com/icons/png/message_envelope_open-0.png" class="app-icon">
-                <span>Invitation</span>
+            <div class="app-item" onclick="window.location.href='galaxy.html'">
+                <img src="asset/Галактика__Galaxy__Pixel_art-removebg-preview.png" class="app-icon">
+                <span>Galaxy</span>
+            </div>
+            
+            <div class="app-item" onclick="window.location.href='sorry/index.html'">
+                <img src="https://i.ibb.co.com/hXZsYxZ/heart.png" class="app-icon" onerror="this.src='https://win98icons.alexmeub.com/icons/png/message_envelope_open-0.png'">
+                <span>Question</span>
             </div>
         </div>
-    
+        <div class="app-item" onclick="toggleMusic()" id="musicBtn" style="position: absolute; bottom: 75px; left: 20px; z-index: 50;">
+            <img src="https://img.icons8.com/color/48/000000/high-volume--v1.png" class="app-icon" style="filter: none;">
+            <span style="background: rgba(0,0,0,0.5); padding: 2px 5px; border-radius: 4px;">On/Off Music</span>
+        </div>
         <div class="desktop-taskbar">
             <div class="taskbar-left">
                 <button class="win-btn">⊞</button>
@@ -167,6 +178,67 @@
         }
         setInterval(updateClock, 1000);
         updateClock();
+
+        const audio = document.getElementById('bgm');
+        const musicBtn = document.getElementById('musicBtn');
+        const musicIcon = musicBtn.querySelector('img'); // Ambil elemen gambarnya
+
+
+        const iconOn = "https://img.icons8.com/color/48/000000/high-volume--v1.png";
+        const iconOff = "https://img.icons8.com/color/48/000000/mute--v1.png";
+
+
+        window.addEventListener('load', () => {
+            const savedTime = localStorage.getItem('audioTime');
+            const savedStatus = localStorage.getItem('audioIsPlaying');
+
+            if (savedTime) {
+                audio.currentTime = parseFloat(savedTime);
+            }
+
+            if (savedStatus === 'true') {
+                audio.play().then(() => {
+                    musicIcon.src = iconOn;
+                }).catch(() => {
+                    console.log("Menunggu klik user untuk lanjut musik...");
+                    musicIcon.src = iconOff;
+                });
+            } else {
+                musicIcon.src = iconOff;
+            }
+        });
+
+
+        setInterval(() => {
+            if (!audio.paused) {
+                localStorage.setItem('audioTime', audio.currentTime);
+                localStorage.setItem('audioIsPlaying', 'true');
+            } else {
+                localStorage.setItem('audioIsPlaying', 'false');
+            }
+        }, 100);
+
+
+        document.addEventListener('click', () => {
+            if (audio.paused && localStorage.getItem('audioIsPlaying') !== 'false') {
+                audio.play();
+                musicIcon.src = iconOn;
+                localStorage.setItem('audioIsPlaying', 'true');
+            }
+        }, { once: true });
+
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                musicIcon.src = iconOn;
+                localStorage.setItem('audioIsPlaying', 'true');
+            } else {
+                audio.pause();
+                musicIcon.src = iconOff;
+                localStorage.setItem('audioIsPlaying', 'false');
+            }
+        }
     </script>
 </body>
 </html>
