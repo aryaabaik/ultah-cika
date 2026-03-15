@@ -10,7 +10,7 @@
 
         /* Background Desktop */
         .desktop-screen {
-            background: url('https://images.unsplash.com/photo-1522383225653-ed111181a951?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat fixed;
+            background: #FFC0CB;
             background-size: cover;
             height: 100vh;
             display: flex;
@@ -102,7 +102,7 @@
         .desktop-taskbar {
             position: absolute;
             bottom: 0; left: 0; width: 100%; height: 48px;
-            background: rgba(0, 120, 215, 0.9);
+            background: rgba(0, 0, 0, 0.5);
             backdrop-filter: blur(12px);
             display: flex;
             justify-content: space-between;
@@ -132,6 +132,8 @@
         }
 
         .taskbar-right { color: white; text-align: right; font-size: 12px; padding-right: 5px; }
+        .taskbar-bubu { display: flex; align-items: flex-end; }
+        .taskbar-bubu-img { width: 70px; height: auto; object-fit: contain; transform: translateY(-8px); }
 
         /* MODAL */
         .modal {
@@ -189,6 +191,9 @@
             <div class="taskbar-right">
                 <div id="taskbar-time" style="font-weight: bold;">00:00</div>
                 <div id="taskbar-date">00/00/0000</div>
+            </div>
+            <div class="taskbar-bubu">
+                <img src="asset/gallery/bubu.png" alt="Bubu" class="taskbar-bubu-img">
             </div>
         </div>
     </div>

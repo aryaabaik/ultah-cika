@@ -15,7 +15,7 @@
         }
 
         .desktop-screen {
-            background: url('https://images.unsplash.com/photo-1522383225653-ed111181a951?q=80&w=2000&auto=format&fit=crop') center/cover no-repeat fixed;
+            background: #FFC0CB;
             background-size: cover;
             height: 100vh; display: flex; justify-content: center; align-items: center;
             position: relative;
@@ -127,7 +127,8 @@
         }
         
         .taskbar-right { text-align: right; font-size: 12px; font-weight: 500; letter-spacing: 0.5px; }
-    </style>
+        .taskbar-bubu { display: flex; align-items: flex-end; }
+        .taskbar-bubu-img { width: 70px; height: auto; object-fit: contain; transform: translateY(-8px); }    </style>
 </head>
 <body>
 
@@ -166,6 +167,9 @@
             <div class="taskbar-right">
                 <div id="time">00.00</div>
                 <div id="date">00/00/0000</div>
+            </div>
+            <div class="taskbar-bubu">
+                <img src="asset/gallery/bubu.png" alt="Bubu" class="taskbar-bubu-img">
             </div>
         </div>
     </div>
