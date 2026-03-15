@@ -1,107 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Windows Mobile Desktop</title>
+    <title>Sistem Operasi Pink</title>
+    <link rel="stylesheet" href="style.css">
     <audio id="bgm" loop>
       <source src="music/Love-wave to earth (instrumental).mp3" type="audio/mpeg">
     </audio>
-    <style>
-        * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-
-        body, html {
-            margin: 0; padding: 0;
-            height: 100%; width: 100%;
-            overflow: hidden;
-            font-family: 'Segoe UI', sans-serif;
-        }
-
-        .desktop-screen {
-            background: url('https://i.pinimg.com/1200x/37/f9/6e/37f96e5603307d23ac4a1013f478fbea.jpg') no-repeat center center;
-            background-size: cover;
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        /* Status Bar */
-        .desktop-status-bar {
-            display: flex;
-            justify-content: space-between;
-            color: white;
-            font-size: 12px;
-            padding: 8px 15px;
-            background: rgba(0, 0, 0, 0.2);
-        }
-
-        /* GRID SISTEM: 4 Kolom per Baris */
-        .app-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr); /* Ini kuncinya: 4 kolom */
-            gap: 20px 10px; /* Jarak atas-bawah 20px, kiri-kanan 10px */
-            padding: 20px;
-            width: 100%;
-        }
-
-        .app-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            cursor: pointer;
-            text-decoration: none;
-        }
-
-        .app-item:active { transform: scale(0.9); }
-
-        .app-icon {
-            width: 50px;
-            height: 50px;
-            object-fit: contain;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
-        }
-
-        .app-item span {
-            color: white;
-            font-size: 11px;
-            margin-top: 8px;
-            text-align: center;
-            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
-            width: 100%;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* Taskbar */
-        .desktop-taskbar {
-            position: absolute;
-            bottom: 0; width: 100%; height: 55px;
-            background: rgba(0, 114, 198, 0.9);
-            backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .win-btn, .search-btn {
-            background: transparent; border: none; color: white;
-            font-size: 24px; cursor: pointer;
-        }
-
-        .taskbar-right { color: white; text-align: right; }
-        .taskbar-time { font-size: 14px; font-weight: 600; }
-        .taskbar-date { font-size: 10px; opacity: 0.9; }
-    </style>
 </head>
 <body>
     <div class="desktop-screen">
         <div class="desktop-status-bar">
             <span>Operator</span>
-            <span>📶 5G 🔋</span>
+            <div class="status-icons">
+                <span>📶 5G</span>
+                <span>🔋</span>
+            </div>
         </div>
     
         <div class="app-grid">
@@ -146,13 +61,15 @@
             
             <div class="app-item" onclick="window.location.href='sorry/index.html'">
                 <img src="https://i.ibb.co.com/hXZsYxZ/heart.png" class="app-icon" onerror="this.src='https://win98icons.alexmeub.com/icons/png/message_envelope_open-0.png'">
-                <span>Question</span>
+                <span>Tanya</span>
             </div>
         </div>
-        <div class="app-item" onclick="toggleMusic()" id="musicBtn" style="position: absolute; bottom: 75px; left: 20px; z-index: 50;">
-            <img src="https://img.icons8.com/color/48/000000/high-volume--v1.png" class="app-icon" style="filter: none;">
-            <span style="background: rgba(0,0,0,0.5); padding: 2px 5px; border-radius: 4px;">On/Off Music</span>
+        
+        <div class="music-toggle" onclick="toggleMusic()" id="musicBtn">
+            <img src="https://img.icons8.com/color/48/000000/high-volume--v1.png" alt="Music" id="musicIconImg">
+            <span>On/Off Music</span>
         </div>
+
         <div class="desktop-taskbar">
             <div class="taskbar-left">
                 <button class="win-btn">⊞</button>
@@ -165,6 +82,7 @@
         </div>
     </div>
 
+    <!-- Script Music & Jam -->
     <script>
         function updateClock() {
             const sekarang = new Date();
@@ -180,13 +98,10 @@
         updateClock();
 
         const audio = document.getElementById('bgm');
-        const musicBtn = document.getElementById('musicBtn');
-        const musicIcon = musicBtn.querySelector('img'); // Ambil elemen gambarnya
-
+        const musicIcon = document.getElementById('musicIconImg');
 
         const iconOn = "https://img.icons8.com/color/48/000000/high-volume--v1.png";
         const iconOff = "https://img.icons8.com/color/48/000000/mute--v1.png";
-
 
         window.addEventListener('load', () => {
             const savedTime = localStorage.getItem('audioTime');
@@ -208,7 +123,6 @@
             }
         });
 
-
         setInterval(() => {
             if (!audio.paused) {
                 localStorage.setItem('audioTime', audio.currentTime);
@@ -218,7 +132,6 @@
             }
         }, 100);
 
-
         document.addEventListener('click', () => {
             if (audio.paused && localStorage.getItem('audioIsPlaying') !== 'false') {
                 audio.play();
@@ -226,7 +139,6 @@
                 localStorage.setItem('audioIsPlaying', 'true');
             }
         }, { once: true });
-
 
         function toggleMusic() {
             if (audio.paused) {
