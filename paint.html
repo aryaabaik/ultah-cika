@@ -16,7 +16,7 @@
         .desktop-screen {
             background: #FFC0CB;
             background-size: cover;
-            height: 100vh; display: flex; justify-content: center; align-items: center;
+            height: 100%; height: 100dvh; display: flex; justify-content: center; align-items: center;
             position: relative;
         }
 
@@ -85,6 +85,7 @@
             display: flex; justify-content: space-between; align-items: center;
             padding: 0 15px; color: white;
             border-top: 1px solid rgba(255,255,255,0.2);
+            z-index: 100;
         }
         .active-app-indicator { border-bottom: 3px solid #f24e1e; padding-bottom: 3px; }
         .taskbar-bubu { display: flex; align-items: flex-end; }
